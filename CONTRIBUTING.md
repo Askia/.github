@@ -11,6 +11,8 @@ Here are some important resources:
 
   * [Coding standard policies](https://teamipsos.atlassian.net/wiki/spaces/AskiaDev/pages/1995866113/Coding+standards+policies)
   * [C# coding standard and best practices](https://teamipsos.atlassian.net/l/cp/6EhZmEFt)
+  * [General best practices and code smells](https://github.com/Askia/Documentation/blob/master/Development/best-practices-and-code-smells.md)
+  
 
 ## Submitting changes
 
