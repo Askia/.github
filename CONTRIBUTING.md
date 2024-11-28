@@ -10,7 +10,7 @@ Here are some important resources:
 ## Coding standard policies
 
   * [Coding standard policies](https://teamipsos.atlassian.net/wiki/spaces/AskiaDev/pages/1995866113/Coding+standards+policies)
-  = [C# coding standard and best practices](https://teamipsos.atlassian.net/l/cp/6EhZmEFt)
+  * [C# coding standard and best practices](https://teamipsos.atlassian.net/l/cp/6EhZmEFt)
 
 ## Submitting changes
 
