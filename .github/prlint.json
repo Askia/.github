@@ -1,0 +1,8 @@
+{
+  "title": [
+    {
+      "pattern": "(\\[(DOFL|RDS|IN|FIELD|POR|SRE|SEC|EMB)-\\d+\\])|Bump(\\ )",
+      "message": "Your title needs to contains a JIRA ticket number (e.g., [ABC-1234])."
+    }
+  ]
+}
