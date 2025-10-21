@@ -1,0 +1,4 @@
+When performing a code review, follow the guidelines below.
+
+When performing a code review, apply the checks in
+[clean-code-guidelines.md](../docs/clean-code-guidelines.md).
