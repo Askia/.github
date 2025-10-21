@@ -868,7 +868,7 @@ public void EmptyUsername_ShouldBeValid() {
 
 **JavaScript**:
 ```javascript
-test('empty username is valid — to confirm', () => {
+test('empty username is valid -- to confirm', () => {
   expect(validateUsername("")).toBe(true);
 });
 ```
