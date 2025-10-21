@@ -1038,7 +1038,6 @@ const apiKey = process.env.MAILER_API_KEY;
 var apiKey = Configuration["Mailer:ApiKey"];
 ```
 
-### fourth principle is renamed to S4 to match the sequence
 ### S4: Apply the Principle of Least Privilege
 Restrict access by roles.
 
