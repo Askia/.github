@@ -27,10 +27,10 @@ jobs:
 
         if [ "$FOUND_COUNT" -eq 0 ]; then
           echo "No specific hallmark files found. Exiting with success."
-          echo "::set-output name=run-detector::false"
+          echo "run-detector=false" >> $GITHUB_OUTPUT
         else
           echo "Hallmark files found. Proceeding with security check."
-          echo "::set-output name=run-detector::true"
+          echo "run-detector=true" >> $GITHUB_OUTPUT
         fi
 
     # --- Conditional Detector Step ---
