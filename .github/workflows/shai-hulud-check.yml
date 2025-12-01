@@ -1,16 +1,41 @@
-name: Shai-Hulud 2.0 Security Check
+name: Askia Shai-Hulud 2.0 Security Check
 
 on:
   push:
     branches: [ main, master, develop ]
   pull_request:
     branches: [ main, master, develop ]
+  merge_group:
 
 jobs:
   security-check:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: gensecaihq/Shai-Hulud-2.0-Detector@v1
-        with:
-          fail-on-critical: true
+    - uses: actions/checkout@v4
+    - name: Check for Hallmarks and Exit if Not Found
+      id: hallmark-check
+      run: |
+        # Node.js/JavaScript project indicators 
+        HALLMARK_FILES=("package.json" "package-lock.json" "yarn.lock" "tsconfig.json" "webpack.config.js" ".babelrc" "*.js" "*.jsx" "*.ts" "*.tsx") 
+        
+        FOUND_COUNT=0
+        for file in "${HALLMARK_FILES[@]}"; do
+          if [ -f "$file" ]; then
+            FOUND_COUNT=$((FOUND_COUNT+1))
+          fi
+        done
+
+        if [ "$FOUND_COUNT" -eq 0 ]; then
+          echo "No specific hallmark files found. Exiting with success."
+          echo "run-detector=false" >> $GITHUB_OUTPUT
+        else
+          echo "Hallmark files found. Proceeding with security check."
+          echo "run-detector=true" >> $GITHUB_OUTPUT
+        fi
+
+    # --- Conditional Detector Step ---
+    - name: Run Shai-Hulud 2.0 Detector
+      if: ${{ steps.hallmark-check.outputs.run-detector == 'true' }}
+      uses: gensecaihq/Shai-Hulud-2.0-Detector@v1
+      with:
+        fail-on-critical: true
