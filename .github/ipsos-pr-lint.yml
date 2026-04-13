@@ -1,5 +1,5 @@
 enabled: true
 checks:
-  - regex: (^Bump\(|\[[A-Z]{2,}-[0-9]+\])
+  - regex: (^Bump\s+|\[[A-Z]{2,}-[0-9]+\])
     regex_flags: i
     message: 'Please add a Jira ticket in the PR Title (e.g. [PROJECT-123]).'
