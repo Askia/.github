@@ -1,0 +1,47 @@
+name: Check DB migrations
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  check-db-migrations:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Detect migration files
+        id: detect
+        run: |
+          git fetch origin ${{ github.base_ref }}
+
+          FILES=$(git diff --name-only origin/${{ github.base_ref }}...HEAD)
+
+          echo "$FILES"
+
+          if echo "$FILES" | grep -Ei 'migrations|migration|\.sql$|DbMigrations|EFMigrations'; then
+            echo "has_migrations=true" >> $GITHUB_OUTPUT
+          else
+            echo "has_migrations=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Comment on PR
+        if: steps.detect.outputs.has_migrations == 'true'
+        run: |
+          gh pr comment ${{ github.event.pull_request.number }} \
+            --body "did you write the confluence documentation?"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Block PR
+        if: steps.detect.outputs.has_migrations == 'true'
+        run: |
+          echo "This PR contains DB migrations. Confluence documentation confirmation is required."
+          exit 1
