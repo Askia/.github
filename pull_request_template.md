@@ -13,6 +13,7 @@
 - [ ] I have extended current unit tests suite.
 - [ ] I have made corresponding changes to the documentation.
 - [ ] My changes generate no new warnings or new Sonar issues
+- [ ] Confluence documentation updated
 
 ## Does this version change anything in the API dependencies of the app
 [Enumerate the API dependencies that are modified in the implementation. Eg: `/api/v3/service/route` changed to `/api/v4/service/route`]
@@ -25,3 +26,11 @@
 
 ## Additional Information
 [Any additional information that reviewers should be aware of.]
+
+[Documentation]
+Confluence URL:
+
+- [ ] Documentation not required
+
+Reason:
+

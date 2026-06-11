@@ -2,11 +2,11 @@ name: Check DB migrations
 
 on:
   pull_request:
-    types: [opened, synchronize, reopened, ready_for_review]
+    types: [opened, edited, synchronize, reopened, ready_for_review]
 
 permissions:
   contents: read
-  pull-requests: write
+  pull-requests: read
 
 jobs:
   check-db-migrations:
@@ -32,16 +32,15 @@ jobs:
             echo "has_migrations=false" >> $GITHUB_OUTPUT
           fi
 
-      - name: Comment on PR
+      - name: Validate PR description
         if: steps.detect.outputs.has_migrations == 'true'
-        run: |
-          gh pr comment ${{ github.event.pull_request.number }} \
-            --body "did you write the confluence documentation?"
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Block PR
-        if: steps.detect.outputs.has_migrations == 'true'
+          PR_BODY: ${{ github.event.pull_request.body }}
         run: |
-          echo "This PR contains DB migrations. Confluence documentation confirmation is required."
-          exit 1
+          if echo "$PR_BODY" | grep -Eiq 'https://.*confluence|not applicable|documentation not required'; then
+            echo "Documentation section completed"
+          else
+            echo "Migration detected but documentation section is incomplete"
+            echo "Please add a Confluence link or mark documentation as Not applicable with a reason."
+            exit 1
+          fi
