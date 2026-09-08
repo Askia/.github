@@ -8,6 +8,7 @@
 [Discuss the impact of your changes on the project. This might include effects on performance, new dependencies, or changes in behaviour.]
 
 ## Checklist
+- [ ] I have requested a **balanced** Copilot review and addressed all issues.
 - [ ] My code adheres to the coding and style guidelines of the project.
 - [ ] I have performed a self-review of my own code.
 - [ ] I have extended current unit tests suite.
